@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "702595157568",
+    "project_id": "kurdistan-visitors",
+    "storage_bucket": "kurdistan-visitors.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702595157568:android:f13c6c9be2d794326c59a5",
+        "android_client_info": {
+          "package_name": "com.example.kurdistan_visitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702595157568-9isclak85s065lhrn3ici68psmuvqlk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi_xkJuGdDKj5Si2lz24d1DT239XGXWto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702595157568-9isclak85s065lhrn3ici68psmuvqlk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
