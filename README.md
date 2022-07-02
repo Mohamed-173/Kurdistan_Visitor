@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # kurdistan_visitor
 
 #The Project need a lot of work likes: 
