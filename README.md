@@ -15,3 +15,4 @@ Requirements Sdk:<br />
  • Flutter version 2.10.5<br /> 
     • Dart version 2.16.2<br />
     • DevTools version 2.9.2<br />
+ * it's not config to ios
