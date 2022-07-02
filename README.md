@@ -11,7 +11,7 @@ emailvirifaid:package,textfield:widget,etc.
 TODO: Refactoring entire App because its dirty and not clean code.
 
 
-requared Sdk:
- • Flutter version 2.10.5 
-    • Dart version 2.16.2
-    • DevTools version 2.9.2
+Requirements Sdk:<br />
+ • Flutter version 2.10.5<br /> 
+    • Dart version 2.16.2<br />
+    • DevTools version 2.9.2<br />
