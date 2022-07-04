@@ -62,11 +62,30 @@ class _LoginState extends State<Login> {
     });
   }
 
+  String? validator(Validator? validate, String? value) {
+    if (validate != null) {
+      if (validate == Validator.email) {
+        if (!RegExp(
+                r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
+            .hasMatch(_email.value.text)) {
+          return ' Email UnValid';
+        }
+      }
+      //For Password
+      if (validate == Validator.password) {
+        if (_password.value.text.length < 6) {
+          return 'morethan 6 charecter';
+        }
+      }
+    }
+    return null;
+  }
+
   Future<void> chd2() async {
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
       // ignore: avoid_print
-      print('YAY! Free cute dog pics!');
+      print('The result is true of internet connection');
       setState(() {
         _hasInternet = result;
       });
@@ -85,31 +104,6 @@ class _LoginState extends State<Login> {
 
     super.dispose();
   }
-
-  // Future<bool> check() async {
-  //   // bool inter = false;
-  //   var connectivityResult = await (Connectivity().checkConnectivity());
-  //   if (connectivityResult == ConnectivityResult.mobile) {
-  //     // I am connected to a mobile network.
-  //     print('....................... mobile data');
-  //     return true;
-  //   } else if (connectivityResult == ConnectivityResult.wifi) {
-  //     try {
-  //       return true;
-  //     } on SocketException catch (_) {
-  //       print('not connected---------------------');
-
-  //       return false;
-  //     }
-  //     // I am connected to a wifi network.
-  //     // print('....................... wifi : $inter ');
-  //     // return inter;
-  //   } else {
-  //     print('....................... no internet');
-  //     // I am not connected to internet
-  //     return false;
-  //   }
-  // }
 
 // Be sure to cancel subscription after you are done
 // Firebase.initializeApp();
@@ -135,7 +129,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    // chd();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
@@ -218,21 +211,12 @@ class _LoginState extends State<Login> {
                                     ),
                                     child: Card(
                                       child: TextField(
-                                        // onTap: () {},
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         controller: _email,
                                         decoration: InputDecoration(
-                                          errorText: _validate1
-                                              ? 'Required'
-                                              : EmailValidator.validate(
-                                                      _email.text)
-                                                  ? _iswrong1
-                                                      ? _errorMessages.code
-                                                      : null
-                                                  : _email.text.isNotEmpty
-                                                      ? 'Not Validate Email'
-                                                      : null,
+                                          errorText: validator(Validator.email,
+                                              _email.value.text),
                                           prefixIcon: const Icon(Icons.email),
                                           labelText: 'Email...',
                                         ),
@@ -253,16 +237,9 @@ class _LoginState extends State<Login> {
                                         obscureText: !_showPass,
                                         keyboardType: TextInputType.text,
                                         decoration: InputDecoration(
-                                          errorText: _validate
-                                              ? 'Required'
-                                              : _password.text.length >= 6
-                                                  ? _iswrong
-                                                      // ? _errorMessages.code
-                                                      ? null
-                                                      : null
-                                                  : _password.text.isNotEmpty
-                                                      ? 'minimal 6 character'
-                                                      : null,
+                                          errorText: validator(
+                                              Validator.password,
+                                              _password.value.text),
                                           prefixIcon: const Icon(Icons.lock),
                                           suffixIcon: IconButton(
                                               color: !_showPass
@@ -819,3 +796,5 @@ class _LoginState extends State<Login> {
         });
   }
 }
+
+enum Validator { email, password }

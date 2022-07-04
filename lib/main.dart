@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kurdistan_visitor/welcomepages/checkinternet.dart';
 import 'currentchk.dart';
@@ -9,6 +8,7 @@ import 'welcomepages/welcome_page.dart';
 import './screen/home.dart';
 
 import './welcome_main.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
