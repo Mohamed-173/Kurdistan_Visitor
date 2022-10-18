@@ -1,17 +1,10 @@
-// import 'package:data_connection_checker/data_connection_checker.dart';
-// import 'dart:async';
-
-// import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-// import './forget_password.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-// ignore: import_of_legacy_library_into_null_safe
+
 import 'package:email_validator/email_validator.dart';
-// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 
 // import 'dart:io';
@@ -63,11 +56,12 @@ class _LoginState extends State<Login> {
   }
 
   String? validator(Validator? validate, String? value) {
-    if (validate != null) {
+    if (value != null) {
       if (validate == Validator.email) {
         if (!RegExp(
                 r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-            .hasMatch(_email.value.text)) {
+            .hasMatch(value)) {
+          print("value: $value");
           return ' Email UnValid';
         }
       }
@@ -77,6 +71,8 @@ class _LoginState extends State<Login> {
           return 'morethan 6 charecter';
         }
       }
+    } else {
+      return ' requered';
     }
     return null;
   }
@@ -321,13 +317,11 @@ class _LoginState extends State<Login> {
                                                                   _forgetMail,
                                                               decoration:
                                                                   InputDecoration(
-                                                                errorText: _validate2
-                                                                    ? 'Required'
-                                                                    : EmailValidator.validate(_forgetMail.text)
-                                                                        ? null
-                                                                        : _forgetMail.text.isNotEmpty
-                                                                            ? 'Not Validate Email'
-                                                                            : null,
+                                                                errorText: validator(
+                                                                    Validator
+                                                                        .email,
+                                                                    _email.value
+                                                                        .text),
                                                                 prefixIcon:
                                                                     const Icon(Icons
                                                                         .email),
@@ -454,7 +448,7 @@ class _LoginState extends State<Login> {
                                               });
                                         },
                                         child: const Text(
-                                          'Forget Password1',
+                                          'Forget Password',
                                           style: TextStyle(
                                             color: Colors.black,
                                             decoration:
@@ -471,7 +465,7 @@ class _LoginState extends State<Login> {
                                     padding: const EdgeInsets.all(8),
                                     child: TextButton(
                                       child: const Text(
-                                        'Log In1',
+                                        'Log In',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
@@ -516,7 +510,7 @@ class _LoginState extends State<Login> {
 
                                                 // ignore: avoid_print
                                                 print(
-                                                    'YAY! Free cute dog pics!');
+                                                    ' you have internet connection');
                                                 // print(_password.text.isNotEmpty);
                                                 final newUser = await auth
                                                     .signInWithEmailAndPassword(
